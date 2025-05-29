@@ -1,8 +1,9 @@
-import { colors, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material"
+import {Dialog, DialogActions, DialogTitle, Button } from "@mui/material"
 import { Car } from "../types"
-import React, { useState } from "react"
+import { useState } from "react"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addCar } from "../api/carapi";
+import CarDialogContent from "./CarDialogContent";
 
 export default function AddCar() {
   const [open, setOpen] = useState(false);
@@ -48,10 +49,13 @@ export default function AddCar() {
 
   return(
     <>
-      <button onClick={handleClickOpen}>New Car</button> 
+      <Button onClick={handleClickOpen} variant='outlined'>New Car</Button> 
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New</DialogTitle>
-        <DialogContent>
+        <CarDialogContent car={car} handleChange={handleChange} />
+
+
+        {/* <DialogContent>
           <input placeholder="Brand" name="brand" value={car.brand}
           onChange={handleChange} />
           <br />
@@ -71,10 +75,10 @@ export default function AddCar() {
           <input placeholder="Price" name="price" value={car.price}
           onChange={handleChange} />
           <br />
-        </DialogContent>
+        </DialogContent> */}
         <DialogActions>
-          <button onClick={handleClose}>취소</button>
-          <button onClick={handieSave}>저장</button>
+          <Button onClick={handleClose}>취소</Button>
+          <Button onClick={handieSave}>저장</Button>
         </DialogActions>
       </Dialog>
     </>

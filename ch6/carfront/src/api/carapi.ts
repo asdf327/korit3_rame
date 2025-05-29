@@ -1,8 +1,11 @@
 import axios from "axios";
-import { CarResponse } from "../types";
+import { CarEntry, CarResponse, Car } from "../types";
 
 const getCars = async (): Promise<CarResponse[]> => {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/cars`);
+  const tokem = sessionStorage.getItem('jwt');
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/cars`, {
+      headers: {'Authorization': tokem}
+    });
 
     return response.data._embedded.cars;
   }
@@ -22,5 +25,14 @@ const getCars = async (): Promise<CarResponse[]> => {
     return response.data;
   }
 
+  export const updateCar = async (carEntry : CarEntry) : Promise<CarResponse> => {
+    const response = await axios.put(carEntry.url, carEntry.car, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+  
+    return response.data;
+  }
 
 export {getCars}
