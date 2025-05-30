@@ -77,8 +77,8 @@ export default function EditCar({cardata} : FormProps) {
         <DialogTitle>차량 수정하기</DialogTitle>
         <CarDialogContent car={car} handleChange={handleChange} />
         <DialogActions>
-          <Button onClick={handleClose}>확인</Button>
-          <Button onClick={handieSave}>취소</Button>
+          <Button onClick={handleClose}>취소</Button>
+          <Button onClick={handieSave}>확인</Button>
           
         </DialogActions>
       </Dialog>
